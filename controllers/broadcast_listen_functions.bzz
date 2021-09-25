@@ -1,0 +1,20 @@
+rebroadcast_msg = {}
+
+# this function is called when data is heard
+function heard(topic, value, rid) {
+	rebroadcast_msg = value
+}
+
+function broadcast(topic, raw_data) {
+	if (raw_data == nil) {
+		return
+	}
+
+	var msg = {}
+	msg.val = raw_data.val
+	msg.id = raw_data.id
+	msg.loc = raw_data.loc
+	msg.id_msg = current_msg_id
+	
+	neighbors.broadcast(topic, msg)
+}

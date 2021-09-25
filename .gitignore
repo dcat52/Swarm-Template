@@ -1,0 +1,14 @@
+data.dat
+*.deb
+*.bo
+*.bdb
+*.dat
+*.mkv
+*.mp4
+*,png
+*.gif
+.DS_Store
+
+graphs/
+build/
+.vscode/

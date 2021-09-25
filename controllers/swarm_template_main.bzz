@@ -1,0 +1,49 @@
+# Use Shift + Click to select a robot
+# When a robot is selected, its variables appear in this editor
+
+# Use Ctrl + Click (Cmd + Click on Mac) to move a selected robot to a different location
+
+# import pre-made libraries
+include "controllers/libs/table.bzz"
+include "controllers/libs/vec2.bzz"
+
+# custom imports
+include "controllers/agent.bzz"
+include "controllers/movement_functions.bzz"
+include "controllers/broadcast_listen_functions.bzz"
+
+# declare global variables
+nRobots = 10
+
+function init() {
+
+	# create 2 groups
+	grpA = swarm.create(1)
+	grpB = swarm.create(2)
+
+	# place robots in groups based on IDs
+	grpA.select(id < nRobots/2)
+	grpB = grpA.others(2)
+	
+	# set the LEDs of each group different
+	if(grpA.in()) {
+		set_leds(255,0,0)
+	}
+	if(grpB.in()) {
+		set_leds(0,255,0)
+	}
+
+	math.rng.setseed(id)
+}
+
+function step() {
+	# tell each group to do work
+	grpA.exec(work)
+	grpB.exec(work)
+}
+
+function reset() {
+}
+
+function destroy() {
+}

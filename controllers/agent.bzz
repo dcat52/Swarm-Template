@@ -1,0 +1,8 @@
+function work() {
+	# have agents listen to topic and execute function when received 
+	neighbors.listen("listeningTopic", heard)
+	# have agents broadcast message on topic
+	broadcast("broadcastingTopic", rebroadcast_msg)
+	# have agents move around
+	move_around()
+}

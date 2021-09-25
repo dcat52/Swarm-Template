@@ -1,0 +1,2 @@
+bzzc controllers/swarm_template_main.bzz
+make

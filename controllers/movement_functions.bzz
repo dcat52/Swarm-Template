@@ -1,0 +1,31 @@
+turn_count = 0
+
+# this function returns a table of vector wheel speeds
+# the vector will turn the bot right to avoid an obstacle
+# otherwise goes straight
+function obstacle_avoidance() {
+
+	var v = math.max(proximity[0].value, proximity[1].value)
+	v = math.max(v, proximity[7].value)
+
+	var ob = (v <= 1 and v > 0.1)
+	
+	if(ob or turn_count < 10) {
+		turn_count = turn_count + 1
+
+		if(turn_count > 10)
+			turn_count = 0
+
+		return { .1 = -5.0 , .2 = 5.0 }
+	} 
+
+	else if(not ob) {
+		return { .1 = 5.0 , .2 = 5.0 }
+	}
+}
+
+function move_around() {
+	# just avoid obstacles
+	var wheel_speeds = obstacle_avoidance()
+	set_wheels(wheel_speeds[1], wheel_speeds[2])
+}
